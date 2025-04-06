@@ -1,14 +1,5 @@
 import { CartItem, Product } from "../types";
 
-function calTotal(products: Product[]): number {
-  return products.reduce((total, product) => {
-    if (product.instock) {
-      return total + product.price;
-    }
-    return total;
-  }, 2);
-}
-
 export function getInstockProducts(products: Product[]): Product[] {
   return products.filter((product) => product.instock);
 }
