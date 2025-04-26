@@ -1,18 +1,16 @@
 export interface Product {
   id: string;
+  image: string;
   name: string;
   price: number;
-  instock: boolean;
+  inStock: boolean;
   tags?: string[];
   category: Category;
 }
-type Category = "electronics" | "clothing" | "home" | "books";
 
-export interface User {
-  id: string;
-  name: string;
-  email: string;
-  isAdmin: boolean;
+export interface CartItem {
+  product: Product;
+  quantity: number;
 }
 
-export type CartItem = Product & { quantity: number };
+export type Category = "phone" | "tablet" | "computer";

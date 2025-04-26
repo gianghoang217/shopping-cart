@@ -2,27 +2,24 @@ import { Product } from "../types";
 
 export const products: Product[] = [
   {
-    id: "1",
-    name: "Laptop",
-    price: 999.99,
-    instock: true,
-    tags: ["electronics", "computer"],
-    category: "electronics",
-  },
-  {
-    id: "2",
-    name: "T-shirt",
-    price: 19.99,
-    instock: true,
-    tags: ["clothing", "fashion"],
+    id: "ok",
+    name: "ok",
+    price: 3,
+    inStock: true,
     category: "clothing",
   },
   {
-    id: "3",
-    name: "PS5",
-    price: 199.99,
-    instock: false,
-    tags: ["electronics", "computer"],
-    category: "electronics",
+    id: "ok2",
+    name: "ok 2",
+    price: 7,
+    inStock: true,
+    category: "clothing",
+  },
+  {
+    id: "ok 3",
+    name: "ok 3",
+    price: 9,
+    inStock: true,
+    category: "clothing",
   },
 ];

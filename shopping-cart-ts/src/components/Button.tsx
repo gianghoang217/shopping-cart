@@ -1,10 +1,17 @@
+import { ReactNode } from "react";
+
 interface ButtonProps {
-  handleClick: () => void;
-  children: React.ReactNode;
+  children: ReactNode;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   className?: string;
 }
-function Button(props: ButtonProps) {
-  return <button onClick={props.handleClick}>{props.children}</button>;
+
+function Button({ children, onClick, className }: ButtonProps) {
+  return (
+    <button className={`bg-black text-white rounded px-3 py-2 ${className}`} onClick={onClick}>
+      {children}
+    </button>
+  );
 }
 
 export default Button;
