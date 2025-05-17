@@ -14,3 +14,14 @@ export interface CartItem {
 }
 
 export type Category = "phone" | "tablet" | "computer";
+
+export interface CartProduct {
+  id: number;
+  title: string;
+  price: number;
+  quantity: number;
+  total: number;
+  discountPercentage: number;
+  discountedTotal: number;
+  thumbnail: string;
+}

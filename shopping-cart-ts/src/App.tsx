@@ -1,6 +1,7 @@
 import "./App.css";
 import Product from "./components/Product";
 import Navbar from "./components/Navbar";
+import CartPage from "./components/CartPage";
 import { useState } from "react";
 import { CartItem, Product as ProductType } from "./types";
 // 1 function
@@ -55,31 +56,26 @@ function App() {
     },
   ];
 
-  /**
-   * 
-
-    
-
-     <p>🛒 {totalItems} sản phẩm</p>
-      <div>
-        <ul>
-          <li> <image> <h4>title</h4> x <span>quantity</span> = <span> total</span> <button>X</button>
-        </ul>
-      </div>
-      <p>Tổng: {totalPrice.toLocaleString()}₫</p>
-
-   */
   function addToCart(product: ProductType): void {
     const existingIndex = cart.findIndex((c) => c.product.id === product.id);
     if (existingIndex >= 0) {
-      // return cart.map(c =>
-      //   c.product.id === product.id ? { ...c, quantity: c.quantity + 1 } : c
-      // );
       const newCart = [...cart];
       newCart[existingIndex].quantity++;
       setCart(newCart);
     } else {
       const newCart = [...cart, { product, quantity: 1 }];
+      setCart(newCart);
+    }
+  }
+
+  function deleteFromCart(product: ProductType): void {
+    const existingIndex = cart.findIndex((c) => c.product.id === product.id);
+    if (existingIndex >= 0) {
+      const newCart = [...cart];
+      newCart[existingIndex].quantity--;
+      if (newCart[existingIndex].quantity === 0) {
+        newCart.splice(existingIndex, 1);
+      }
       setCart(newCart);
     }
   }
@@ -102,6 +98,7 @@ function App() {
             // Product({key:product.id)
           })}
       </div>
+      <CartPage />
     </div>
   );
 }
