@@ -8,7 +8,10 @@ interface ButtonProps {
 
 function Button({ children, onClick, className }: ButtonProps) {
   return (
-    <button className={`bg-black text-white rounded px-3 py-2 ${className}`} onClick={onClick}>
+    <button
+      className={` rounded px-3 py-2 ${className || "bg-black text-white"}`}
+      onClick={onClick}
+    >
       {children}
     </button>
   );

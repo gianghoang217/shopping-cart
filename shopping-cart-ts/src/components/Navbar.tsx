@@ -1,49 +1,82 @@
-import { useState } from "react";
-import { CartItem } from "../types";
+import { useContext, useState } from "react";
+import { Cart } from "../types";
 import Button from "./Button";
+import { NavLink } from "react-router";
+import useCounter from "../utils/useCounter";
+import { CounterContext } from "../context/useCounterContext";
 
-function Navbar({ cart }: { cart: CartItem[] }) {
+// useContext
+// use[customHook]
+
+function Navbar({ cart }: { cart: Cart }) {
   const [open, setOpen] = useState(false);
-  const totalItems = cart.length;
-  const totalPrice = cart.reduce((sum, item) => sum + item.product.price * item.quantity, 0);
+  // const { count, increase, decrease } = useCounter()
+  const counterContext = useContext(CounterContext);
+
+  console.log(counterContext);
+  // function handleNavbarItemClick(title: string): void {
+  //     alert(title)
+  // }
+  const totalItems = cart.totalQuantity;
   return (
-    <nav className="navbar">
-      <div>Logo</div>
+    <nav className="navbar py-2">
       <div>
-        <Button>Home</Button>
-        <Button>About</Button>
+        Logo
+        {/* 
+            {count}
+            <button onClick={increase}>+</button>
+            <button onClick={decrease}>-</button> */}
+        {JSON.stringify(counterContext)}
+      </div>
+      <div>
+        {/* // onclick => setState BrowserRouter => re-render component | update browser path */}
+
+        <NavLink to="/">
+          {({ isActive }) => {
+            return (
+              <Button className={isActive ? "bg-black text-white" : "bg-white text-black"}>
+                Home
+              </Button>
+            );
+          }}
+        </NavLink>
+        <NavLink to="/product">
+          {({ isActive }) => {
+            return (
+              <Button className={isActive ? "bg-black text-white" : "bg-white text-black"}>
+                Product
+              </Button>
+            );
+          }}
+        </NavLink>
 
         <div className="relative">
           <Button className="h-full" onClick={() => setOpen(!open)}>
-            🛒 Cart ({cart.length})
+            🛒 ({cart.totalQuantity})
           </Button>
-
           {open && (
-            <div className="mt-3 p-3 absolute right-0 top-full bg-white text-black min-w-[350px] shadow rounded flex flex-col items-flex-start text-left gap-2">
-              <p className="text-l font-bold"> {totalItems} san pham</p>
+            <div className="mt-3 p-3 absolute right-0 top-full bg-white text-black min-w-[350px] width shadow rounded flex flex-col items-flex-start text-left gap-2">
+              <p className="font-bold">🛒 {totalItems} sản phẩm</p>
               <div>
                 <ul>
-                  {cart.map((item) => (
-                    <li
-                      key={item.product.id}
-                      className="flex gap-1 items-center mb-2 border-b-[#d2d2d2] border-b pb-2"
-                    >
-                      <img />
-                      <h4>{item.product.name}</h4>x <span>{item.quantity}</span> ={" "}
-                      <span>{(item.product.price * item.quantity).toLocaleString()}</span>
-                      <Button className="ml-auto bg-red-500">X</Button>
-                    </li>
-                  ))}
-
-                  {/* <li className="flex gap-1">
-                  <image /> <h4>title</h4>x <span>quantity</span>=<span>total</span>
-                  <button>X</button>
-                </li> */}
+                  {cart.products.map((product) => {
+                    return (
+                      <li className="flex gap-1 items-center mb-2 border-b-[#d2d2d2] border-b pb-2">
+                        {" "}
+                        <image /> <h4>{product.title}</h4> x <span>{product.quantity}</span> ={" "}
+                        <span> {(product.quantity * product.price).toLocaleString()}₫</span>{" "}
+                        <Button className="ml-auto bg-red-500">X</Button>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
               <p>
-                Tong: <b>{totalPrice.toLocaleString()}</b>
+                Tổng: <b>{cart.total}₫</b>
               </p>
+              <NavLink to="/cart">
+                <button className="rounded bg-black text-white p-3">View All</button>
+              </NavLink>
             </div>
           )}
         </div>

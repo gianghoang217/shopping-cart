@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import CartItem from "./CartItem";
 import Spinner from "./Spinner";
 import { CartProduct } from "../types";
+import useCounter from "../utils/useCounter";
 import useFetchData from "../utils/useFetchData";
 import { CounterContext } from "../context/useCounterContext";
 
