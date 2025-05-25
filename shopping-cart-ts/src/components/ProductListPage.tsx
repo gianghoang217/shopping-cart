@@ -13,7 +13,7 @@ function ProductListPage() {
   // Get a specific query parameter
   const page = searchParams.get("page") || 1;
   const { data, isLoading, fetchData } = useFetchData(
-    `https://dummyjson.com/products?limit=${skip}&skip= ${Number(page) * skip - skip}`
+    `https://dummyjson.com/products?limit=${skip}&skip=${Number(page) * skip - skip}`
   );
   console.log(page);
   /**
